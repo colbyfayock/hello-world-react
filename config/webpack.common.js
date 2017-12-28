@@ -1,14 +1,27 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+/**
+ * Plugin Configuration
+ */
+
+const HtmlWebpack = new HtmlWebpackPlugin({
+  template: './app/index.html',
+  filename: 'index.html',
+  inject: 'body'
+})
+
 const ExtractSass = new ExtractTextPlugin({
-  filename: "[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development",
+  filename: '[name].[contenthash].css',
   allChunks: true
 });
+
+
+/*
+ * Webpack Config
+ */
 
 const config = {
 
@@ -26,20 +39,24 @@ const config = {
 
     rules: [
 
+      // Sass / CSS
+
       {
         test: /\.(css|scss)$/,
         use: ExtractSass.extract({
           use: [
             {
-              loader: "css-loader"
+              loader: 'css-loader'
             },
             {
-              loader: "sass-loader"
+              loader: 'sass-loader'
             }
           ],
-          fallback: "style-loader"
+          fallback: 'style-loader'
         })
       },
+
+      // Javascript
 
       {
         test: /\.jsx?$/,
@@ -56,16 +73,8 @@ const config = {
   },
 
   plugins: [
-
-    new HtmlWebpackPlugin({
-      template: './app/index.html',
-      filename: 'index.html',
-      inject: 'body'
-    }),
-
-    new UglifyJsPlugin(),
-    ExtractSass,
-
+    HtmlWebpack,
+    ExtractSass
   ]
 
 }
