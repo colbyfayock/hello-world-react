@@ -1,3 +1,11 @@
+## What's Inside
+ - React
+ - Babel
+ - Sass
+ - ESlint
+ - Jest
+ - Enzyme
+
 ## Prereqs
 Yarn (npm will work fine too)
 
