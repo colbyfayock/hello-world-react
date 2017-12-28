@@ -2,11 +2,12 @@
   "name": "hello-world-react",
   "version": "1.0.0",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "test": "jest",
     "lint": "eslint ./app --ext .jsx,.js",
     "start": "webpack-dev-server --config ./config/webpack.dev.js",
-    "build": "yarn lint && webpack --config ./config/webpack.prod.js"
+    "build": "rm -rf dist/* && yarn lint && yarn test && webpack --config ./config/webpack.prod.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.36",
