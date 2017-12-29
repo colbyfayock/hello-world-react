@@ -1,10 +1,12 @@
 ## What's Inside
+ - Webpack
  - React
  - Babel
  - Sass
- - ESlint
+ - PostCSS
  - Jest
  - Enzyme
+ - ESlint
 
 ## Prereqs
 Yarn (npm will work fine too)
