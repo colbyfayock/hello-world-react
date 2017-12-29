@@ -36,6 +36,10 @@ const config = {
     filename: 'app.[hash].js'
   },
 
+  resolve: {
+    extensions: [ '.js', '.jsx' ]
+  },
+
   module: {
 
     rules: [
