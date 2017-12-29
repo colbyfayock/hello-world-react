@@ -1,5 +1,13 @@
+@import 'test';
+
 body {
   background-color: magenta;
 }
 
-@import 'test';
+h1 {
+  display: flex;
+}
+
+* {
+  box-sizing: border-box;
+}

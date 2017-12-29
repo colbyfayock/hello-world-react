@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "lint": "eslint ./app --ext .jsx,.js",
+    "lint": "eslint -c ./config/eslint.config.js ./app --ext .jsx,.js",
     "start": "webpack-dev-server --config ./config/webpack.dev.js",
     "build": "rm -rf dist/* && yarn lint && yarn test && webpack --config ./config/webpack.prod.js"
   },
@@ -28,6 +28,10 @@
     "jest": "^22.0.4",
     "node-sass": "^4.7.2",
     "path": "^0.12.7",
+    "postcss": "^6.0.14",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.9",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "sass-loader": "^6.0.6",
@@ -38,6 +42,6 @@
     "webpack-merge": "^4.1.1"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./config/jest.js"
+    "setupTestFrameworkScriptFile": "./config/jest.config.js"
   }
 }

@@ -1,4 +1,4 @@
-{
+module.exports = {
 
   "env": {
     "browser": true
@@ -13,7 +13,7 @@
   },
 
   "rules": {
-    "semi": [2, "always"]
+    "semi": [ 2, "always" ]
   },
 
   "plugins": [

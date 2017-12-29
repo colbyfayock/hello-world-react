@@ -46,10 +46,21 @@ const config = {
         use: ExtractSass.extract({
           use: [
             {
-              loader: 'css-loader'
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
             },
             {
               loader: 'sass-loader'
+            },
+            {
+              loader: 'postcss-loader',
+              query: {
+                config: {
+                  path: './config/postcss.config.js'
+                }
+              }
             }
           ],
           fallback: 'style-loader'
@@ -63,7 +74,23 @@ const config = {
         exclude: /(node_modules|bower_components)/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              "presets": [
+                "@babel/preset-react",
+                [
+                  "@babel/preset-env",
+                  {
+                    "targets": {
+                      "browsers": [
+                        "last 2 versions",
+                        "ie >= 10"
+                      ]
+                    }
+                  }
+                ]
+              ]
+            }
           }
         ]
       }
