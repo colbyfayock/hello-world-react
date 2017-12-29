@@ -8,7 +8,7 @@
     "lint": "eslint -c ./config/eslint.config.js ./app --ext .jsx,.js",
     "start": "webpack-dev-server --config ./config/webpack.dev.js",
     "build": "rm -rf dist/* && yarn lint && yarn test && webpack --config ./config/webpack.prod.js",
-    "precommit": "yarn lint"
+    "precommit": "yarn lint && yarn test"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.36",
