@@ -26,6 +26,7 @@ const ExtractSass = new ExtractTextPlugin({
 const config = {
 
   entry: [
+    'babel-polyfill',
     './app/assets/js/main.js',
     './app/assets/scss/main.scss'
   ],
