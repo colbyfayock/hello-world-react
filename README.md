@@ -7,6 +7,8 @@
  - Jest
  - Enzyme
  - ESlint
+ - Husky
+ - Prerenders default view
 
 ## Prereqs
 Yarn (npm will work fine too)
