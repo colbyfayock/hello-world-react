@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config ./config/jest.config.js",
     "lint": "eslint -c ./config/eslint.config.js ./app --ext .jsx,.js",
     "start": "webpack-dev-server --config ./config/webpack.dev.js",
-    "build": "rm -rf dist/* && yarn lint && yarn test && webpack --config ./config/webpack.prod.js",
+    "build": "yarn lint && yarn test && rm -rf dist/* && webpack --config ./config/webpack.prod.js",
     "precommit": "yarn lint && yarn test"
   },
   "devDependencies": {
@@ -20,12 +20,14 @@
     "babel-jest": "^22.0.4",
     "babel-loader": "^8.0.0-beta.0",
     "babel-polyfill": "^6.26.0",
+    "case-sensitive-paths-webpack-plugin": "^2.1.1",
     "css-loader": "^0.28.7",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "3.x",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
     "jest": "^22.0.4",
@@ -33,6 +35,7 @@
     "path": "^0.12.7",
     "postcss": "^6.0.14",
     "postcss-cssnext": "^3.0.2",
+    "postcss-flexbugs-fixes": "^3.2.0",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.9",
     "react": "^16.2.0",
@@ -43,8 +46,5 @@
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
     "webpack-merge": "^4.1.1"
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "./config/jest.config.js"
   }
 }

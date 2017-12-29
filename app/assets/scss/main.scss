@@ -1,13 +1,17 @@
 @import 'test';
 
 body {
+  // Testing css next and flex bugs
+  display: flex;
+  flex: 1 0 calc(1vw - 1px);
   background-color: magenta;
 }
 
-h1 {
-  display: flex;
+h1,
+p {
+  text-align: center;
 }
 
-* {
-  box-sizing: border-box;
+img {
+  width: 100%;
 }
