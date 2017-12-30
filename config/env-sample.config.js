@@ -6,5 +6,7 @@
 module.exports = {
   "env": "development",
   "config_path": "config",
-  "assets_path": "assets"
+  "base_path": "app",
+  "assets_path": "assets",
+  "output_path": "dist"
 }
