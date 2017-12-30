@@ -1,9 +1,15 @@
 const Webpack = require('webpack');
 const Merge = require('webpack-merge');
 const Common = require('./webpack.common.js');
+const Env = require('./env.config.js');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
+const settings = {
+  theme_color: '#f2575b'
+}
 
 /**
  * Plugin Configuration
@@ -39,9 +45,10 @@ const UglifyJS = new UglifyJSPlugin({
 // the file removing whitespace and empty attributes
 
 const HtmlWebpack = new HtmlWebpackPlugin({
-  template: './app/index.html',
+  template: `./${Env.base_path}/index.html`,
   filename: 'index.html',
   inject: 'body',
+  theme_color: settings.theme_color,
   minify: {
     removeComments: true,
     collapseWhitespace: true,
@@ -55,6 +62,26 @@ const HtmlWebpack = new HtmlWebpackPlugin({
     minifyURLs: true
   }
 });
+
+// Automatically generate all of the favicons from the source image
+const FaviconsWebpack = new FaviconsWebpackPlugin({
+  logo: `./${Env.base_path}/${Env.assets_path}/images/favicon-prod.png`,
+  prefix: `${Env.assets_path}/images/icons-[hash]/`,
+  background: settings.theme_color,
+  title: Env.name,
+  icons: {
+    android: true,
+    appleIcon: true,
+    favicons: true,
+    appleStartup: false,
+    coast: false,
+    firefox: true,
+    opengraph: false,
+    twitter: false,
+    yandex: false,
+    windows: false
+  }
+})
 
 
 /*
@@ -74,7 +101,8 @@ const config = {
 
   plugins: [
     UglifyJS,
-    HtmlWebpack
+    HtmlWebpack,
+    FaviconsWebpack
   ]
 
 }

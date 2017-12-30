@@ -1,6 +1,5 @@
 const Webpack = require('webpack');
 const path = require('path');
-
 const Env = require('./env.config.js');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -35,12 +34,12 @@ const config = {
 
   entry: [
     'babel-polyfill',
-    './app/assets/js/main.js',
-    './app/assets/scss/main.scss'
+    `./${Env.base_path}/${Env.assets_path}/js/main.js`,
+    `./${Env.base_path}/${Env.assets_path}/scss/main.scss`
   ],
 
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve(`./${Env.output_path}`),
     filename: `${Env.assets_path}/js/app.[hash].js`
   },
 
@@ -110,7 +109,7 @@ const config = {
       //     imported to the final destination with the  correct path.
       //     This requires the images to be "required" in the components
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg|webp)$/,
         use: [
           {
             loader: 'file-loader',
