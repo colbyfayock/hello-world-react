@@ -16,6 +16,9 @@ Yarn (npm will work fine too)
 brew install yarn
 ```
 
+## Config
+Copy `config/env-sample.config.js` over to `config/env.config.js`
+
 ## Dev
 ```
 yarn install
