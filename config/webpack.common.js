@@ -2,7 +2,8 @@ const Webpack = require('webpack');
 const path = require('path');
 const Env = require('./env.config.js');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 /**
  * Plugin Configuration
@@ -20,11 +21,10 @@ const WebpackDefine = new Webpack.DefinePlugin({
 
 // Pulls the CSS from the loader and produces it's own external file
 
-const ExtractSass = new ExtractTextPlugin({
+const ExtractSass = new MiniCssExtractPlugin({
   filename: `${Env.assets_path}/css/[name].[contenthash].css`,
-  allChunks: true
+  chunks: 'all'
 });
-
 
 /*
  * Webpack Config
@@ -52,40 +52,37 @@ const config = {
     strictExportPresence: true,
 
     rules: [
-
-      // Sass / CSS
-      // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // "sass" loader adds Sass support
-      // "postcss" loader applies autoprefixer to our CSS.
-      // fallback "style" loader turns CSS into JS modules that inject <style> tags.
-      // Additional config: ./config/postcss.config.js
-
       {
-        test: /\.(css|scss)$/,
-        use: ExtractSass.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                minimize: true,
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'sass-loader'
-            },
-            {
-              loader: 'postcss-loader',
-              query: {
-                config: {
-                  path: `${Env.config_path}/postcss.config.js`
-                }
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: `${Env.config_path}/postcss.config.js`
               }
             }
-          ]
-        })
+          }
+        ]
       },
 
       // Javascript

@@ -4,7 +4,7 @@ const Common = require('./webpack.common.js');
 const Env = require('./env.config.js');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const settings = {
@@ -17,27 +17,27 @@ const settings = {
 
 // Compresses and minifies JS builds
 
-const UglifyJS = new UglifyJSPlugin({
+const MinifyJs = new TerserPlugin({
+  cache: true,
   sourceMap: true,
-  uglifyOptions: {
-    ecma: 5,
+  terserOptions: {
+    parse: {
+      ecma: 8
+    },
     compress: {
-      // disabled because of an issue with Uglify breaking seemingly valid code:
-      // https://github.com/facebookincubator/create-react-app/issues/2376
-      // via create-react-app
-      comparisons: false
+      comparisons: false,
+      inline: 2
     },
     mangle: {
       // Works around the Safari 10 loop iterator bug "Cannot declare a let variable twice"
-      safari10: true
+      safari10: true,
     },
     output: {
-      // turned on because emoji and regex is not minified properly using default
-      // https://github.com/facebookincubator/create-react-app/issues/2488
-      // via create-react-app
+      ecma: 5,
+      comments: false,
       ascii_only: true
     }
-  }
+  },
 });
 
 // Creates a template HTML file and produces the dist version
@@ -100,10 +100,13 @@ const config = {
   devtool: 'source-map',
 
   plugins: [
-    UglifyJS,
     HtmlWebpack,
     FaviconsWebpack
-  ]
+  ],
+
+  optimization: {
+    minimizer: [MinifyJs]
+  }
 
 }
 

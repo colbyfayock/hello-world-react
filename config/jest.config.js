@@ -2,7 +2,9 @@ module.exports = {
 
   "rootDir": '../',
 
-  "setupTestFrameworkScriptFile": "<rootDir>/config/jest-setup.config.js",
+  "setupFilesAfterEnv": [
+    "<rootDir>/config/jest-setup.config.js"
+  ],
 
   // Sets up mocks for images and files that the tests either can't handle
   // or doesn't make sense to include

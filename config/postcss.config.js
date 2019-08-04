@@ -1,13 +1,9 @@
 module.exports = {
-  'plugins': {
-    'postcss-cssnext': {
-      'browsers': [
-        'last 4 versions',
-        'Firefox ESR',
-        'ie >= 10',
-        '>1%'
-      ]
-    },
+  parser: 'sugarss',
+  plugins: {
+    'postcss-import': {},
+    'postcss-preset-env': {},
+    'cssnano': {},
     'postcss-flexbugs-fixes': require('postcss-flexbugs-fixes')
-  },
+  }
 };
